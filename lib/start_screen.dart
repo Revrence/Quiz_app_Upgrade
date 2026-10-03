@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class StartScreen extends StatelessWidget {
-   const StartScreen(this.startQuiz , {super.key});
+   const StartScreen(this.startQuiz, this.pastResults,{super.key});
 
 final void Function() startQuiz;
+final void Function() pastResults;
 
-  @override
+  @override 
   Widget build(context) {
     return  Center(
       child: Column(
@@ -44,6 +45,16 @@ final void Function() startQuiz;
           ),
         icon: const Icon(Icons.arrow_right_alt),
         label: const Text('Start Quiz')),
+
+        OutlinedButton.icon(
+          onPressed: pastResults,
+          
+        style: OutlinedButton.styleFrom(
+          foregroundColor: Colors.white
+          ),
+        icon: const Icon(Icons.history),
+        label: const Text('Past Results')),
+
       ],
       ),
     );

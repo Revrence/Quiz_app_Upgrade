@@ -3,15 +3,19 @@ import 'package:flutter/material.dart';
 import 'package:adv_basics/data/questions.dart';
 import 'package:adv_basics/questions_summary/questions_summary.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:adv_basics/past_results_screen.dart';
 
 class ResultsScreen extends StatelessWidget {
   const ResultsScreen({
     super.key,
     required this.chosenAnswers,
     required this.onRestart,
+    required this.mainMenu,
     });
 
   final void Function() onRestart;
+  final void Function() mainMenu;
+
   final List<String> chosenAnswers;
 
   List<Map<String,Object>> getSummaryData(){
@@ -37,7 +41,9 @@ Widget build(BuildContext context){
   final numCorrectQuestions = summaryData.where((data){
     return data['user_answer'] == data['correct_answer'];
   }).length;
-
+  //part of upgrade #2
+  addResult('$numCorrectQuestions out of $numTotalQuestions' );
+  
   return SizedBox(
       width: double.infinity,
       child: Container(
@@ -63,6 +69,15 @@ Widget build(BuildContext context){
             ),
             icon: const Icon(Icons.refresh),
             label: const Text('Restart Quiz!'),
+          ),
+          //part of upgrade #1
+          TextButton.icon(
+            onPressed: mainMenu,
+            style: TextButton.styleFrom(
+              foregroundColor: Colors.white,
+            ),
+            icon: const Icon(Icons.home),
+            label: const Text('Main Menu'),
           )
       ],
       )
